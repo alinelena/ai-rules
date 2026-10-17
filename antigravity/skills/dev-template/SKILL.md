@@ -48,3 +48,4 @@ This skill outlines the software engineering practices, tooling stack, and local
 ## 5. Local Execution & Debugging (Optional)
 - **Run Application**: `<run_app_command>` (e.g. `<env_prefix> uv run <entrypoint>` or `npm run dev`)
 - **Common Gotchas**: Any known quirks, environment variables, or platform-specific notes.
+
