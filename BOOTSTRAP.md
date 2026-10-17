@@ -1,0 +1,21 @@
+# `ai-rules` — Agent Bootstrap Entrypoint
+
+You are an AI coding agent reading the `ai-rules` template repository because the user asked you to install skills and rules into their current project.
+
+## Target Platform: Antigravity (Default)
+
+We currently focus on **Google Antigravity** (Antigravity IDE, Antigravity 2.0, and `agy` CLI).
+
+Read and execute the full procedure in [`antigravity/BOOTSTRAP.md`](./antigravity/BOOTSTRAP.md):
+- **If reading from a local clone**: Open `antigravity/BOOTSTRAP.md` directly.
+- **If fetching remotely via GitHub**:
+  ```sh
+  git clone --depth 1 https://github.com/alinelena/ai-rules.git /tmp/ai-rules
+  ```
+  Then read `/tmp/ai-rules/antigravity/BOOTSTRAP.md` and follow every step.
+
+## Default Options Summary
+
+Unless the user explicitly specified otherwise in their prompt, install **both** by default:
+1. **`elephant-goldfish` (`default: ON`)**: Fetches and stack-adapts the 5 Elephant/Goldfish workflow skills (`eg-brainstorm`, `eg-prd`, `eg-fix-bug`, `eg-new-feature`, `eg-precommit-review`) from [`https://github.com/ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish) (branch `ddmms`) into `.agents/skills/eg-*/SKILL.md`.
+2. **`interject` (`default: ON`)**: Installs the `/interject` rule into `.agents/rules/interject.md`, the `/interject` slash-command skill into `.agents/skills/interject/SKILL.md`, and updates `AGENTS.md` so the user can inject new information via `/interject` at any point and force the agent to audit prior assumptions and rethink its approach from first principles.
