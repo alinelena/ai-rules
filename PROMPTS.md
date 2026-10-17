@@ -48,3 +48,4 @@ Update this project's AI skills and rules from https://github.com/alinelena/ai-r
 2. Diff our local `.agents/skills/eg-*/SKILL.md` files against the upstream templates in `ddmms/elephant-goldfish`, merging any new workflow logic while preserving all of our project-specific test, lint, and stack commands.
 3. Update `AGENTS.md` snippets if needed and report the changes without committing.
 ```
+

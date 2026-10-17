@@ -30,3 +30,4 @@ Before making any further code edits or running mutating commands, print a conci
 ## 5. Confirmation & Execution Gate
 - **If the rethink introduces architectural trade-offs, scope changes, or multiple viable directions**: Use `ask_question` (or ask the user directly if trivial) to confirm the revised direction before modifying files.
 - **If the new information is a clear, unambiguous directive**: Present the `Interjection Re-evaluation` block and immediately execute the revised approach.
+

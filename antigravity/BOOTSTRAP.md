@@ -141,3 +141,4 @@ Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INT
    - Summary of `AGENTS.md` updates.
    - Quick usage cheatsheet (`/interject <new info>`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`).
    - **Do NOT commit or push** unless the user explicitly asks you to stage or commit the changes.
+

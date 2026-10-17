@@ -55,3 +55,4 @@ When executing `.agents/skills/eg-*/SKILL.md` in Antigravity IDE / Antigravity 2
 Each skill workflow stops short of committing. Authorize the commit explicitly when ready. [BOOTSTRAP: commit-policy reminder if the project has one]
 <<<EG_SNIPPET_END>>>
 ```
+
