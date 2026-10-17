@@ -6,12 +6,13 @@ A reusable template repository of AI rules and workflow skills designed to be in
 
 ## What Gets Installed
 
-When you point an Antigravity agent at this repository in a target project, it configures `.agents/` and `AGENTS.md` with two modular capabilities (**both enabled by default**):
+When you point an Antigravity agent at this repository in a target project, it configures `.agents/` and `AGENTS.md` with three modular capabilities (**all enabled by default**):
 
 | Option | Default | Installed Files in Target Project | Purpose |
 | :--- | :---: | :--- | :--- |
 | **1. `elephant-goldfish`** | **ON** | `.agents/skills/eg-brainstorm/SKILL.md`<br>`.agents/skills/eg-prd/SKILL.md`<br>`.agents/skills/eg-fix-bug/SKILL.md`<br>`.agents/skills/eg-new-feature/SKILL.md`<br>`.agents/skills/eg-precommit-review/SKILL.md`<br>+ `AGENTS.md` section | Fetches the [Elephant/Goldfish](https://github.com/ddmms/elephant-goldfish) workflow templates (`ddmms` branch), inspects your project's stack (language, package manager, linter, test runner), and adaptively injects stack-tuned skills. |
 | **2. `interject`** | **ON** | `.agents/rules/interject.md`<br>`.agents/skills/interject/SKILL.md`<br>+ `AGENTS.md` section | Adds an always-on project rule and a first-class `/interject` slash command that lets you inject new information mid-task and forces the agent to audit prior assumptions and rethink its approach from first principles. |
+| **3. `dev-template`** | **ON** | `.agents/skills/<project_name>-dev/SKILL.md`<br>+ `AGENTS.md` entry | Populates the generic `<project_name>-dev` development guide template with your project's environment (`micromamba`, `uv`), build backend (`uv_build`), linting (`ruff`), testing (`pytest`, `tox`), and CI/CD workflows. |
 
 ---
 
@@ -31,12 +32,12 @@ Read ~/playground/ai-rules/BOOTSTRAP.md and install skills and rules in this pro
 
 ### Customizing Options in Your Prompt
 
-- **Default (installs `elephant-goldfish` + `interject`)**:
+- **Default (installs `elephant-goldfish` + `interject` + `dev-template`)**:
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project.`
-- **Only `/interject` (without `elephant-goldfish`)**:
+- **Skip `elephant-goldfish` (only `/interject` + `<project_name>-dev`)**:
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with elephant-goldfish=off.`
-- **Only `elephant-goldfish` (without `/interject`)**:
-  > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with interject=off.`
+- **Only `/interject`**:
+  > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with elephant-goldfish=off and dev-template=off.`
 
 See [`PROMPTS.md`](./PROMPTS.md) for more copy-pasteable prompts, including smart-merging upstream updates.
 
@@ -75,6 +76,10 @@ Installed by default from [`https://github.com/ddmms/elephant-goldfish`](https:/
 | `/eg-fix-bug` | Produces a Problem Doc, runs an independent goldfish diagnosis check, captures the bug as a failing test first, fixes it, and runs the test gate. |
 | `/eg-precommit-review` | Runs pre-flight checks (lint, typecheck, tests) and spawns an unanchored reviewer goldfish loop (up to 5 rounds) on the pending diff. |
 
+### 3. `<project_name>-dev` — Contextualized Development Guide Skill
+
+Populated automatically during bootstrap from [`antigravity/skills/dev-template/SKILL.md`](./antigravity/skills/dev-template/SKILL.md) using the target repository's detected stack profile (`micromamba`, `uv`, `uv_build`, `ruff`, `pytest`, `tox`, `.github/workflows/`), giving the agent an on-demand reference (`/<project_name>-dev`) for running tests, adding dependencies, linting, and verifying builds.
+
 ---
 
 ## Repository Structure
@@ -90,6 +95,8 @@ ai-rules/
 │   ├── rules/
 │   │   └── interject.md                 # Standalone /interject workspace rule
 │   └── skills/
+│       ├── dev-template/
+│       │   └── SKILL.md                 # Template for <project_name>-dev skill
 │       └── interject/
 │           └── SKILL.md                 # /interject slash-command skill
 └── .agents/

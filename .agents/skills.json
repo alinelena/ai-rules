@@ -1,8 +1,8 @@
 {
   "entries": [
     {
-      "path": "antigravity/skills"
+      "path": "antigravity/skills",
+      "exclude": ["dev-template"]
     }
   ]
 }
-

@@ -4,12 +4,12 @@ Copy and paste any of the prompts below into an Antigravity session opened in yo
 
 ---
 
-## 1. Default Install (Elephant/Goldfish + `/interject` Rule & Skill)
+## 1. Default Install (Elephant/Goldfish + `/interject` + `<project_name>-dev`)
 
- installs both the stack-adapted [Elephant/Goldfish](https://github.com/ddmms/elephant-goldfish) workflow skills and the `/interject` rule & slash command:
+Installs the stack-adapted [Elephant/Goldfish](https://github.com/ddmms/elephant-goldfish) workflow skills, the `/interject` rule & slash command, and the contextualized `<project_name>-dev` development skill:
 
 ```text
-Read https://github.com/alinelena/ai-rules (specifically BOOTSTRAP.md and antigravity/BOOTSTRAP.md) and install the skills and rules in this project with default options (elephant-goldfish enabled + /interject rule and skill enabled).
+Read https://github.com/alinelena/ai-rules (specifically BOOTSTRAP.md and antigravity/BOOTSTRAP.md) and install the skills and rules in this project with default options.
 ```
 
 *(Or if `ai-rules` is cloned locally at `~/playground/ai-rules`):*
@@ -20,32 +20,29 @@ Read ~/playground/ai-rules/BOOTSTRAP.md and install the skills and rules in this
 
 ---
 
-## 2. Install Only `/interject` (Skip Elephant/Goldfish)
+## 2. Selective Install Options
 
-If you only want the `/interject` rule and slash command without the 5 `eg-*` skills:
+You can toggle any of the three components (`elephant-goldfish`, `interject`, `dev-template`) in your prompt:
 
-```text
-Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install only the /interject rule and skill in this project (disable elephant-goldfish).
-```
+- **Skip Elephant/Goldfish (install only `/interject` and `<project_name>-dev`)**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install the skills and rules in this project with elephant-goldfish=off.
+  ```
 
----
-
-## 3. Install Only Elephant/Goldfish (Skip `/interject`)
-
-```text
-Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install only the elephant-goldfish skills from https://github.com/ddmms/elephant-goldfish in this project (skip /interject).
-```
+- **Install only `/interject`**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install only the /interject rule and skill in this project (elephant-goldfish=off, dev-template=off).
+  ```
 
 ---
 
-## 4. Update an Already-Bootstrapped Project
+## 3. Update an Already-Bootstrapped Project
 
-To pull the latest `/interject` rules from `ai-rules` and the latest upstream workflow logic from `ddmms/elephant-goldfish` while preserving your target project's local stack commands:
+To pull the latest `/interject` and `dev-template` updates from `ai-rules` plus the latest upstream workflow logic from `ddmms/elephant-goldfish` while preserving your target project's local stack commands:
 
 ```text
 Update this project's AI skills and rules from https://github.com/alinelena/ai-rules and https://github.com/ddmms/elephant-goldfish (branch ddmms):
 1. Refresh `.agents/rules/interject.md` and `.agents/skills/interject/SKILL.md` from `ai-rules`.
-2. Diff our local `.agents/skills/eg-*/SKILL.md` files against the upstream templates in `ddmms/elephant-goldfish`, merging any new workflow logic while preserving all of our project-specific test, lint, and stack commands.
+2. Diff our local `.agents/skills/<project_name>-dev/SKILL.md` and `.agents/skills/eg-*/SKILL.md` files against the upstream templates in `ai-rules` and `ddmms/elephant-goldfish`, merging any new workflow sections while preserving all of our project-specific test, lint, and stack commands.
 3. Update `AGENTS.md` snippets if needed and report the changes without committing.
 ```
-

@@ -8,23 +8,25 @@ This file is read by an **Antigravity** agent (Antigravity IDE, Antigravity 2.0,
 
 1. **Identify the target repository**:
    - The target repository is the current workspace root (unless the user specified a different target path).
-   - Print the target's absolute path.
+   - Derive `<project_name>` from the target repository's directory name or package manifest (`pyproject.toml`, `package.json`, `Cargo.toml`, etc.), normalized to lowercase hyphenated form.
+   - Print the target's absolute path and detected `<project_name>`.
 
 2. **Resolve installation options**:
    Unless the user explicitly overrides an option in their prompt, use these defaults:
    - **`elephant-goldfish` (`default: ON`)**: Installs and stack-adapts the 5 Elephant/Goldfish workflow skills (`eg-brainstorm`, `eg-prd`, `eg-fix-bug`, `eg-new-feature`, `eg-precommit-review`) from [`https://github.com/ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish) (branch `ddmms`).
    - **`interject` (`default: ON`)**: Installs the `/interject` rule (`.agents/rules/interject.md`), the `/interject` slash-command skill (`.agents/skills/interject/SKILL.md`), and the `/interject` section in `AGENTS.md` so the user can inject new information at any time and force the agent to rethink its approach from first principles.
+   - **`dev-template` (`default: ON`)**: Contextualizes `antigravity/skills/dev-template/SKILL.md` with the target repository's stack profile and installs it to `.agents/skills/<project_name>-dev/SKILL.md`.
 
 3. **Check for existing files**:
-   - Check if the target already has `.agents/rules/interject.md`, `.agents/skills/interject/SKILL.md`, or `.agents/skills/eg-*/SKILL.md`.
-   - Confirm with the user via `ask_question` before overwriting existing customizations (offer to **Install / Update all enabled defaults**, **Install only `/interject`**, **Install only `elephant-goldfish`**, or **Abort**).
+   - Check if the target already has `.agents/rules/interject.md`, `.agents/skills/interject/SKILL.md`, `.agents/skills/<project_name>-dev/SKILL.md`, or `.agents/skills/eg-*/SKILL.md`.
+   - Confirm with the user via `ask_question` before overwriting existing customizations.
 
 ---
 
 ## Step 1: Fetch Template Sources
 
 ### 1A. Fetch `ai-rules` files (if not reading from a local clone)
-If you are reading this file from a local path, read `antigravity/rules/interject.md`, `antigravity/skills/interject/SKILL.md`, and `antigravity/agents-md-snippet.md` directly from that checkout.
+If you are reading this file from a local path, read `antigravity/rules/interject.md`, `antigravity/skills/interject/SKILL.md`, `antigravity/skills/dev-template/SKILL.md`, and `antigravity/agents-md-snippet.md` directly from that checkout.
 
 If you fetched this file remotely, clone or download `ai-rules` into a temporary directory (or your scratch directory):
 ```sh
@@ -41,29 +43,11 @@ git clone --depth 1 -b ddmms https://github.com/ddmms/elephant-goldfish.git /tmp
 
 ---
 
-## Step 2: Install Option 2 — `/interject` Rule & Skill (Default: ON)
+## Step 2: Inspect the Target Stack (When `elephant-goldfish` or `dev-template` is Enabled)
 
-If `interject` is enabled:
-
-1. **Install the Workspace Rule**:
-   - Create `<target>/.agents/rules/` if it does not exist.
-   - Copy `antigravity/rules/interject.md` to `<target>/.agents/rules/interject.md`.
-
-2. **Install the Slash-Command Skill**:
-   - Create `<target>/.agents/skills/interject/` if it does not exist.
-   - Copy `antigravity/skills/interject/SKILL.md` to `<target>/.agents/skills/interject/SKILL.md`.
-   - This registers `/interject` as a first-class slash command in the Antigravity chat input box while `.agents/rules/interject.md` ensures the `/interject` protocol is always active in the agent's context.
-
----
-
-## Step 3: Install Option 1 — `elephant-goldfish` Skills (Default: ON)
-
-If `elephant-goldfish` is enabled, follow the adaptive injection workflow from `/tmp/elephant-goldfish/gemini/BOOTSTRAP.md` tailored for Antigravity:
-
-### 3.1 Inspect the Target Stack
 Read these files in the target repository if they exist (in parallel):
 - `AGENTS.md` (or legacy `GEMINI.md` / `CLAUDE.md`) — existing conventions, commit policy, PR workflow, environment rules
-- `pyproject.toml`, `requirements.txt`, `setup.py`, `Pipfile` (Python / `uv` / `micromamba` / `pytest` / `ruff`)
+- `pyproject.toml`, `requirements.txt`, `setup.py`, `Pipfile`, `tox.ini` (Python / `uv` / `micromamba` / `pytest` / `ruff`)
 - `package.json`, `tsconfig.json`, `playwright.config.ts`, `vitest.config.ts`, `jest.config.js` (Node / Web)
 - `Cargo.toml` (Rust), `go.mod` (Go), `pubspec.yaml` (Flutter/Dart), `Gemfile` (Ruby/Rails), `CMakeLists.txt` / `Makefile` / `justfile`
 - `.pre-commit-config.yaml`, `.github/workflows/*.yml`, `Dockerfile`, `docker-compose.yml`
@@ -72,15 +56,18 @@ Read these files in the target repository if they exist (in parallel):
 Derive and print the **Stack Profile**:
 ```text
 STACK PROFILE
+- Project name (<project_name>):
 - Language(s) and framework(s):
 - Package manager + environment manager (uv / micromamba / npm / cargo / etc.):
-- Linter + how to invoke:
+- Build backend (e.g., uv_build, hatchling, cargo, etc.):
+- Linter & formatter + how to invoke:
 - Type-checker + how to invoke (or "n/a"):
-- Unit/integration test runner + how to invoke:
-- E2E test runner + how to invoke (or "n/a"):
+- Unit/integration test runner & coverage command:
+- E2E / special test modes (xvfb-run, tox matrix, playwright, or "n/a"):
 - Security scanner + how to invoke (or "n/a"):
-- Dev server: command + URL (or "n/a"):
+- Dev server / entrypoint: command + URL (or "n/a"):
 - Code-generation step required before tests + when (or "n/a"):
+- CI/CD workflows (.github/workflows/*.yml):
 - Existing PR workflow, code review process, or merge gates documented in AGENTS.md:
 - Commit message convention from `git log`:
 - Multi-tenancy / auth / scoping / domain concerns the reviewer should always check:
@@ -89,7 +76,11 @@ STACK PROFILE
 
 Ask the user via `ask_question` to confirm or refine the **Stack Profile** before generating the skill files.
 
-### 3.2 Contextualize & Adapt the 5 `eg-*` Skills for Antigravity
+---
+
+## Step 3: Install Enabled Rules & Skills
+
+### 3A. Option 1 — `elephant-goldfish` Skills (Default: ON)
 Using `/tmp/elephant-goldfish/gemini/commands/eg-{brainstorm,prd,fix-bug,new-feature,precommit-review}.md` as templates:
 
 1. **Replace all `[BOOTSTRAP: ...]` placeholders** with concrete commands and paths from the confirmed Stack Profile:
@@ -114,13 +105,26 @@ Using `/tmp/elephant-goldfish/gemini/commands/eg-{brainstorm,prd,fix-bug,new-fea
    - `<target>/.agents/skills/eg-new-feature/SKILL.md`
    - `<target>/.agents/skills/eg-precommit-review/SKILL.md`
 
-   *(Optional: If the `agy` CLI binary is available in `PATH`, also run `agy skills install .agents/skills/<skill-name> --scope workspace` for each installed skill. In Antigravity IDE and Antigravity 2.0, placing `SKILL.md` inside `.agents/skills/<skill-name>/` automatically registers the skill and its `/<skill-name>` slash command.)*
+### 3B. Option 2 — `/interject` Rule & Skill (Default: ON)
+1. **Install the Workspace Rule**:
+   - Create `<target>/.agents/rules/` if it does not exist.
+   - Copy `antigravity/rules/interject.md` to `<target>/.agents/rules/interject.md`.
+2. **Install the Slash-Command Skill**:
+   - Create `<target>/.agents/skills/interject/` if it does not exist.
+   - Copy `antigravity/skills/interject/SKILL.md` to `<target>/.agents/skills/interject/SKILL.md`.
+
+### 3C. Option 3 — `<project_name>-dev` Development Guide Skill (Default: ON)
+1. Read `antigravity/skills/dev-template/SKILL.md`.
+2. Replace `<project_name>`, `<Project Name>`, and all `<..._command>` placeholders with the concrete values from the confirmed Stack Profile (omitting inapplicable subsections cleanly).
+3. Write the populated skill to `<target>/.agents/skills/<project_name>-dev/SKILL.md`.
+
+*(Optional: If the `agy` CLI binary is available in `PATH`, also run `agy skills install .agents/skills/<skill-name> --scope workspace` for each installed skill. In Antigravity IDE and Antigravity 2.0, placing `SKILL.md` inside `.agents/skills/<skill-name>/` automatically registers the skill and its `/<skill-name>` slash command.)*
 
 ---
 
 ## Step 4: Update `<target>/AGENTS.md`
 
-Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>` and/or `<<<EG_SNIPPET_START>>>`) with the target project's `[BOOTSTRAP: ...]` values:
+Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>`, `<<<EG_SNIPPET_START>>>`, and `<project_name>-dev`) with the target project's Stack Profile values:
 
 - If `<target>/AGENTS.md` already exists, inject or update the enabled sections cleanly without clobbering existing project rules.
 - If `<target>/GEMINI.md` exists but `AGENTS.md` does not, preserve existing rules from `GEMINI.md` into `AGENTS.md` alongside the new snippets.
@@ -132,13 +136,13 @@ Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INT
 
 1. **Verify**:
    - If `interject` is enabled: `.agents/rules/interject.md` and `.agents/skills/interject/SKILL.md` exist and have valid formatting.
+   - If `dev-template` is enabled: `.agents/skills/<project_name>-dev/SKILL.md` exists, has `name: <project_name>-dev` in its YAML frontmatter, and contains zero remaining `<...>` template placeholders.
    - If `elephant-goldfish` is enabled: all 5 `.agents/skills/eg-*/SKILL.md` files exist, start with valid YAML frontmatter (`name`, `description`), have zero remaining `[BOOTSTRAP: ...]` placeholders, and retain intact `<<<TEMPLATE_START>>> ... <<<TEMPLATE_END>>>`, `<<<COMPREHENSION_START>>>`, `<<<DESIGN_START>>>`, and `<<<READINESS_START>>>` markers.
    - `AGENTS.md` documents the installed rules and skills.
    - Clean up `/tmp/ai-rules` and `/tmp/elephant-goldfish` if created.
 
 2. **Report to the User**:
-   - Summary of installed rules (`.agents/rules/interject.md`) and skills (`.agents/skills/interject/`, `.agents/skills/eg-*/`).
+   - Summary of installed rules (`.agents/rules/interject.md`) and skills (`.agents/skills/interject/`, `.agents/skills/<project_name>-dev/`, `.agents/skills/eg-*/`).
    - Summary of `AGENTS.md` updates.
-   - Quick usage cheatsheet (`/interject <new info>`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`).
+   - Quick usage cheatsheet (`/interject <new info>`, `/<project_name>-dev`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`).
    - **Do NOT commit or push** unless the user explicitly asks you to stage or commit the changes.
-

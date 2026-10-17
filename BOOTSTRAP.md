@@ -16,7 +16,7 @@ Read and execute the full procedure in [`antigravity/BOOTSTRAP.md`](./antigravit
 
 ## Default Options Summary
 
-Unless the user explicitly specified otherwise in their prompt, install **both** by default:
+Unless the user explicitly specified otherwise in their prompt, install **all three** by default:
 1. **`elephant-goldfish` (`default: ON`)**: Fetches and stack-adapts the 5 Elephant/Goldfish workflow skills (`eg-brainstorm`, `eg-prd`, `eg-fix-bug`, `eg-new-feature`, `eg-precommit-review`) from [`https://github.com/ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish) (branch `ddmms`) into `.agents/skills/eg-*/SKILL.md`.
 2. **`interject` (`default: ON`)**: Installs the `/interject` rule into `.agents/rules/interject.md`, the `/interject` slash-command skill into `.agents/skills/interject/SKILL.md`, and updates `AGENTS.md` so the user can inject new information via `/interject` at any point and force the agent to audit prior assumptions and rethink its approach from first principles.
-
+3. **`dev-template` (`default: ON`)**: Contextualizes `antigravity/skills/dev-template/SKILL.md` with the target repository's stack profile (`micromamba`, `uv`, `ruff`, `pytest`, CI/CD) and installs it to `.agents/skills/<project_name>-dev/SKILL.md`.

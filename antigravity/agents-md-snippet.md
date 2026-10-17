@@ -23,13 +23,13 @@ Whenever a user prompt starts with or contains `/interject <new information, con
 <<<INTERJECT_SNIPPET_END>>>
 ```
 
-## 2. Elephant/Goldfish Snippet (Inject when `elephant-goldfish` is enabled — default: ON)
+## 2. Elephant/Goldfish & Project Skills Snippet (Inject when `elephant-goldfish` or `dev-template` is enabled — default: ON)
 
 ```markdown
 <<<EG_SNIPPET_START>>>
-## Working with Antigravity (Elephant/Goldfish Skills)
+## Working with Antigravity (Project & Elephant/Goldfish Skills)
 
-This project has installed five **Elephant/Goldfish** skills in `.agents/skills/` (from [`ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish)) inspired by [Dave Rensin's Elephant/Goldfish pattern](https://drensin.medium.com/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874):
+This project has installed workspace skills in `.agents/skills/`, including the project development guide (`<project_name>-dev`) and the five **Elephant/Goldfish** workflow skills (from [`ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish)) inspired by [Dave Rensin's Elephant/Goldfish pattern](https://drensin.medium.com/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874):
 - **Elephant**: The working session with full context (`AGENTS.md`, recent turns, architectural history).
 - **Goldfish**: A fresh subagent spawned via `invoke_subagent` (`TypeName: "self"` or `"research"`, or `invoke_agent` in Gemini CLI) with **no prior context**, receiving only the seed, problem doc, design doc, or diff.
 
@@ -41,10 +41,11 @@ When executing `.agents/skills/eg-*/SKILL.md` in Antigravity IDE / Antigravity 2
 - `write_file` / `replace` → `write_to_file` / `replace_file_content`
 - `google_web_search` / `web_fetch` → `search_web` / `read_url_content`
 
-### Available Workflow Skills
+### Available Workspace Skills
 
 | Intent | Slash Command / Trigger | Description |
 |---|---|---|
+| Project dev stack & commands | `/<project_name>-dev` | Environment (`micromamba` / `uv`), build backend, linting (`ruff`), testing (`pytest`), and CI/CD reference for `<project_name>`. |
 | Early-stage concept design | `/eg-brainstorm` or `"Run eg-brainstorm for <rough idea>"` | Multiple goldfish in parallel generate divergent ideas across distinct lenses. All framing questions via `ask_question`. Hands off to `eg-prd` or `eg-new-feature`. |
 | Product Requirements Doc | `/eg-prd` or `"Write an eg-prd for <feature>"` | Codebase grounding → structured gap-filling → parallel research goldfish → synthesized PRD. Saves to `[BOOTSTRAP: prd path, e.g. docs/prds/]`. |
 | Bug fix flow | `/eg-fix-bug` or `"Run eg-fix-bug for <description \| #issue>"` | Problem doc → goldfish diagnosis check → failing test → fix → `eg-precommit-review` → test gate. |
@@ -55,4 +56,3 @@ When executing `.agents/skills/eg-*/SKILL.md` in Antigravity IDE / Antigravity 2
 Each skill workflow stops short of committing. Authorize the commit explicitly when ready. [BOOTSTRAP: commit-policy reminder if the project has one]
 <<<EG_SNIPPET_END>>>
 ```
-
