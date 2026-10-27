@@ -9,6 +9,9 @@
     },
     {
       "path": "aiida-mlip/skills"
+    },
+    {
+      "path": "atomisticskills/skills"
     }
   ]
 }

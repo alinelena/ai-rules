@@ -15,6 +15,7 @@ When you point an Antigravity agent at this repository in a target project, it c
 | **3. `dev-template`** | **ON** | `.agents/skills/<project_name>-dev/SKILL.md`<br>+ `AGENTS.md` entry | Populates the generic `<project_name>-dev` development guide template with your project's environment (`micromamba`, `uv`), build backend (`uv_build`), linting (`ruff`), testing (`pytest`, `tox`), and CI/CD workflows. |
 | **4. `janus-core`** | **Optional** | `janus-core/skills/janus-*/SKILL.md`<br>`janus-core/rules/janus-rules.md`<br>`janus-core/tools/structure_inspector.py` | Full skill group and execution rules for STFC [janus-core](https://github.com/stfc/janus-core) (MLIP atomistic simulations: singlepoint, geomopt, md, eos-elasticity, phonons, neb, descriptors, train-mlip, analysis) with an automated sync script. |
 | **5. `aiida-mlip`** | **Optional** | `aiida-mlip/skills/aiida-mlip-*/SKILL.md`<br>`aiida-mlip/rules/aiida-mlip-rules.md` | Full skill group and execution rules for STFC [aiida-mlip](https://github.com/stfc/aiida-mlip) (AiiDA provenance workflows: singlepoint, geomopt, md, phonons, descriptors, train, ht_workgraph) with an automated sync script. |
+| **6. `atomisticskills`** | **Optional** | `atomisticskills/skills/atomisticskills-*/SKILL.md`<br>`atomisticskills/rules/*.md`<br>`atomisticskills/update.sh` | 130+ modular skills, 9 research workflows, and 11 MCP servers from [AtomisticSkills](https://github.com/learningmatter-mit/AtomisticSkills) (MIT Learning Matter Lab, arXiv:2605.24002) spanning materials discovery, chemistry, drug discovery, and ML potentials with an automated sync script. |
 
 ---
 
@@ -44,8 +45,10 @@ Read ~/playground/ai-rules/BOOTSTRAP.md and install skills and rules in this pro
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with janus-core=on.`
 - **Include AiiDA-MLIP (`aiida-mlip=on`)**:
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with aiida-mlip=on.`
-- **Complete Atomistic & Workflow Suite (`janus-core=on` + `aiida-mlip=on`)**:
-  > `Read https://github.com/alinelena/ai-rules and install all skills and rules in this project with janus-core=on and aiida-mlip=on.`
+- **Include AtomisticSkills (`atomisticskills=on`)**:
+  > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with atomisticskills=on.`
+- **Complete Atomistic & Simulation Suite (`janus-core=on` + `aiida-mlip=on` + `atomisticskills=on`)**:
+  > `Read https://github.com/alinelena/ai-rules and install all atomistic simulation and workflow skills in this project with janus-core=on, aiida-mlip=on, and atomisticskills=on.`
 
 See [`PROMPTS.md`](./PROMPTS.md) for more copy-pasteable prompts, including smart-merging upstream updates.
 
@@ -123,6 +126,21 @@ Installed from the [`aiida-mlip`](https://github.com/alinelena/ai-rules/tree/mai
   - `/aiida-mlip-workflows`: High-throughput workgraphs with `aiida-workgraph` (`build_ht_calc`) across structure directories.
 - **Upstream Sync**: Keep all skills updated via `./aiida-mlip/update.sh` (or `./aiida-mlip/update.sh --check`).
 
+### 6. AtomisticSkills Discovery & Simulation Suite (`learningmatter-mit/AtomisticSkills`)
+
+Installed from the [`atomisticskills`](https://github.com/alinelena/ai-rules/tree/main/atomisticskills) capability group, grounded in MIT Learning Matter Lab [`AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills) (docs: [`https://learningmatter-mit.github.io/AtomisticSkills/`](https://learningmatter-mit.github.io/AtomisticSkills/), paper: arXiv:2605.24002):
+
+- **Comprehensive Multi-Domain Architecture**: 133 modular skills, 9 multi-stage research workflows, and 11 Model Context Protocol (MCP) servers across materials science, molecular chemistry, drug discovery, and machine learning foundation models.
+- **6 Entrypoint Skills**:
+  - `/atomisticskills-core`: Architecture guide, MCP servers (`base`, `mace`, `matgl`, `fairchem`, `atomate2`, `drugdisc`, `smol`), launcher (`venv/run`), and the complete 133-skill directory.
+  - `/atomisticskills-materials`: Materials discovery, crystal mechanics ($C_{ij}$), phonons, VASP DFT via atomate2, CALPHAD, Pourbaix diagrams, XRD phase analysis/refinement, and synthesis recommendation (57 skills).
+  - `/atomisticskills-chemistry`: Conformer generation, ORCA DFT, transition state optimization, IRC verification, reaction kinetics, and MOF gas sorption (GCMC, Widom insertion) (25 skills).
+  - `/atomisticskills-drug-discovery`: Structure-based virtual screening, cavity detection, AutoDock Vina docking, OpenMM all-atom MD, MM/PBSA free energies, and ADMET profiling (19 skills).
+  - `/atomisticskills-ml`: Foundation MLIP model selection, MACE/FairChem/MatGL fine-tuning, generative crystal diffusion (MatterGen, DiffCSP, ADIT), and committee uncertainty (16 skills).
+  - `/atomisticskills-workflows`: Autonomous multi-stage campaigns (Materials Discovery, Drug HTVS, MOF CO2 DAC screening, Generative Halides, Active Learning MLIP loops).
+- **Execution Rules**: Standardized research protocol (`research-standards.md`), coding guidelines (`coding-standards.md`), and environment runtime mappings (`mcp-environments.md`).
+- **Upstream Sync**: Keep all skills and reference catalogs synchronized with upstream releases via `./atomisticskills/update.sh` (or `./atomisticskills/update.sh --check`).
+
 ---
 
 ## Repository Structure
@@ -186,8 +204,28 @@ ai-rules/
 │       ├── aiida-mlip-descriptors/
 │       ├── aiida-mlip-train/
 │       └── aiida-mlip-workflows/
+├── atomisticskills/                     # AtomisticSkills suite capability group
+│   ├── README.md                        # Documentation for atomisticskills group
+│   ├── plugin.json                      # Antigravity plugin manifest
+│   ├── VERSION                          # Upstream version tracker (2.0.0)
+│   ├── update.sh                        # One-command updater from GitHub & docs
+│   ├── rules/                           # Atomistic research, coding & MCP rules
+│   │   ├── AGENTS.md
+│   │   ├── research-standards.md
+│   │   ├── coding-standards.md
+│   │   ├── mcp-environments.md
+│   │   └── workflow-standards.md
+│   ├── scripts/
+│   │   └── update_skills.py             # Upstream parser & sync script
+│   └── skills/                          # 6 domain-level entrypoint skills
+│       ├── atomisticskills-core/
+│       ├── atomisticskills-materials/
+│       ├── atomisticskills-chemistry/
+│       ├── atomisticskills-drug-discovery/
+│       ├── atomisticskills-ml/
+│       └── atomisticskills-workflows/
 └── .agents/
     ├── rules/
     │   └── interject.md                 # Dogfooded /interject rule for this repo
-    └── skills.json                      # Registers antigravity, janus-core & aiida-mlip skills
+    └── skills.json                      # Registers antigravity, janus-core, aiida-mlip & atomisticskills skills
 ```

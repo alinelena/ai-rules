@@ -1,0 +1,14 @@
+{
+  "name": "atomisticskills",
+  "version": "2.0.0",
+  "description": "Comprehensive atomistic simulation suite: 130+ modular skills, 9 multi-stage research workflows, and 11 MCP servers across materials science, chemistry, drug discovery, and machine learning foundation models (MIT Learning Matter Lab).",
+  "author": {
+    "name": "MIT Learning Matter Lab / AtomisticSkills Contributors",
+    "url": "https://github.com/learningmatter-mit/AtomisticSkills"
+  },
+  "homepage": "https://learningmatter-mit.github.io/AtomisticSkills/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/learningmatter-mit/AtomisticSkills.git"
+  }
+}

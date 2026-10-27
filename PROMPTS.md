@@ -44,9 +44,14 @@ You can toggle any of the three components (`elephant-goldfish`, `interject`, `d
   Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install the skills and rules in this project with aiida-mlip=on.
   ```
 
-- **Install Full Atomistic & Workflow Stack (`janus-core=on` + `aiida-mlip=on`)**:
+- **Install with `atomisticskills` (`atomisticskills=on`)**:
   ```text
-  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install all skills and rules in this project with janus-core=on and aiida-mlip=on.
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install the skills and rules in this project with atomisticskills=on.
+  ```
+
+- **Install Complete Atomistic Simulation Stack (`janus-core=on` + `aiida-mlip=on` + `atomisticskills=on`)**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install all skills and rules in this project with janus-core=on, aiida-mlip=on, and atomisticskills=on.
   ```
 
 ---
@@ -92,4 +97,22 @@ To sync skills and reference docs with the latest upstream [`aiida-mlip`](https:
 
 ```bash
 ./aiida-mlip/update.sh
+```
+
+---
+
+## 6. Install or Update AtomisticSkills Group
+
+To equip a project with the MIT Learning Matter Lab [`AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills) (docs: [`https://learningmatter-mit.github.io/AtomisticSkills/`](https://learningmatter-mit.github.io/AtomisticSkills/), paper: arXiv:2605.24002) multi-domain simulation suite:
+
+```text
+Read https://github.com/alinelena/ai-rules and install the atomisticskills group (materials, chemistry, drug-discovery, ml foundation models, workflows) and execution rules into this project.
+```
+
+To sync skills, rules, and reference catalogs with the latest upstream [`AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills) repository:
+
+```bash
+./atomisticskills/update.sh
+# or dry-run check:
+./atomisticskills/update.sh --check
 ```

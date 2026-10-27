@@ -18,6 +18,7 @@ This file is read by an **Antigravity** agent (Antigravity IDE, Antigravity 2.0,
    - **`dev-template` (`default: ON`)**: Contextualizes `antigravity/skills/dev-template/SKILL.md` with the target repository's stack profile and installs it to `.agents/skills/<project_name>-dev/SKILL.md`.
    - **`janus-core` (`default: AUTO-DETECT / OFF`)**: Installs the 10 STFC [`janus-core`](https://github.com/stfc/janus-core) atomistic simulation skills, execution rules, and `structure_inspector.py` tool. Auto-enabled if `janus-core` is found in the target's dependencies or explicitly requested (`janus-core=on`).
    - **`aiida-mlip` (`default: AUTO-DETECT / OFF`)**: Installs the 8 STFC [`aiida-mlip`](https://github.com/stfc/aiida-mlip) workflow and calculation skills and execution rules. Auto-enabled if `aiida-mlip` or `aiida` is found in dependencies or explicitly requested (`aiida-mlip=on`).
+   - **`atomisticskills` (`default: AUTO-DETECT / OFF`)**: Installs the 6 entrypoint skills, execution rules, and reference catalogs from [AtomisticSkills](https://github.com/learningmatter-mit/AtomisticSkills) (MIT Learning Matter Lab, arXiv:2605.24002) covering 133 modular skills, 9 research workflows, and 11 MCP servers. Auto-enabled if `atomisticskills` is detected in dependencies or explicitly requested (`atomisticskills=on`).
 
 3. **Check for existing files**:
    - Check if the target already has `.agents/rules/interject.md`, `.agents/skills/interject/SKILL.md`, `.agents/skills/<project_name>-dev/SKILL.md`, or `.agents/skills/eg-*/SKILL.md`.
@@ -43,13 +44,14 @@ git clone --depth 1 -b ddmms https://github.com/ddmms/elephant-goldfish.git /tmp
 ```
 *(Fallback if `git clone` is unavailable: use `gh api "repos/ddmms/elephant-goldfish/contents/<PATH>?ref=ddmms" -H 'Accept: application/vnd.github.raw'` or `curl -fsSL "https://raw.githubusercontent.com/ddmms/elephant-goldfish/ddmms/<PATH>"` for `gemini/BOOTSTRAP.md`, `gemini/gemini-md-snippet.md`, and `gemini/commands/eg-{brainstorm,prd,fix-bug,new-feature,precommit-review}.md`.)*
 
-### 1C. Fetch `janus-core` and `aiida-mlip` Capability Groups (when enabled)
-When `janus-core` or `aiida-mlip` is requested or detected in the target stack:
-- If reading from a local clone of `ai-rules`, read from `janus-core/` and `aiida-mlip/` directly.
-- If fetched remotely, copy from `/tmp/ai-rules/janus-core` and `/tmp/ai-rules/aiida-mlip`.
+### 1C. Fetch `janus-core`, `aiida-mlip`, and `atomisticskills` Capability Groups (when enabled)
+When `janus-core`, `aiida-mlip`, or `atomisticskills` is requested or detected in the target stack:
+- If reading from a local clone of `ai-rules`, read from `janus-core/`, `aiida-mlip/`, and `atomisticskills/` directly.
+- If fetched remotely, copy from `/tmp/ai-rules/janus-core`, `/tmp/ai-rules/aiida-mlip`, and `/tmp/ai-rules/atomisticskills`.
 - Upstream source references:
   - `janus-core`: [`https://github.com/stfc/janus-core`](https://github.com/stfc/janus-core) and [`https://stfc.github.io/janus-core/`](https://stfc.github.io/janus-core/)
   - `aiida-mlip`: [`https://github.com/stfc/aiida-mlip`](https://github.com/stfc/aiida-mlip) and [`https://stfc.github.io/aiida-mlip/`](https://stfc.github.io/aiida-mlip/)
+  - `atomisticskills`: [`https://github.com/learningmatter-mit/AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills) and [`https://learningmatter-mit.github.io/AtomisticSkills/`](https://learningmatter-mit.github.io/AtomisticSkills/)
 
 ---
 
@@ -143,11 +145,17 @@ When `aiida-mlip` is enabled (from STFC [`aiida-mlip`](https://github.com/stfc/a
 2. Copy `aiida-mlip/rules/aiida-mlip-rules.md` to `<target>/.agents/rules/aiida-mlip-rules.md`.
 3. Ensure `./aiida-mlip/update.sh` is available in `<target>` for syncing future upstream updates.
 
+### 3F. Option 6 — `atomisticskills` Skills & Rules Group (When Enabled)
+When `atomisticskills` is enabled (from MIT Learning Matter Lab [`AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills)):
+1. Copy the 6 entrypoint skills from `atomisticskills/skills/` into `<target>/.agents/skills/` (or copy the entire `atomisticskills/` folder to `<target>/atomisticskills/` and register `"atomisticskills/skills"` in `<target>/.agents/skills.json`).
+2. Copy the rules in `atomisticskills/rules/*.md` to `<target>/.agents/rules/`.
+3. Ensure `./atomisticskills/update.sh` is available in `<target>` for syncing future upstream updates.
+
 ---
 
 ## Step 4: Update `<target>/AGENTS.md`
 
-Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>`, `<<<EG_SNIPPET_START>>>`, `<project_name>-dev`, `<<<JANUS_CORE_SNIPPET_START>>>`, and `<<<AIIDA_MLIP_SNIPPET_START>>>`) with the target project's Stack Profile values:
+Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>`, `<<<EG_SNIPPET_START>>>`, `<project_name>-dev`, `<<<JANUS_CORE_SNIPPET_START>>>`, `<<<AIIDA_MLIP_SNIPPET_START>>>`, and `<<<ATOMISTIC_SKILLS_SNIPPET_START>>>`) with the target project's Stack Profile values:
 
 - If `<target>/AGENTS.md` already exists, inject or update the enabled sections cleanly without clobbering existing project rules.
 - If `<target>/GEMINI.md` exists but `AGENTS.md` does not, preserve existing rules from `GEMINI.md` into `AGENTS.md` alongside the new snippets.
@@ -163,11 +171,12 @@ Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INT
    - If `elephant-goldfish` is enabled: all 5 `.agents/skills/eg-*/SKILL.md` files exist, start with valid YAML frontmatter (`name`, `description`), have zero remaining `[BOOTSTRAP: ...]` placeholders, and retain intact `<<<TEMPLATE_START>>> ... <<<TEMPLATE_END>>>`, `<<<COMPREHENSION_START>>>`, `<<<DESIGN_START>>>`, and `<<<READINESS_START>>>` markers.
    - If `janus-core` is enabled: all 10 `janus-*` skills exist, execution rules are placed, and `janus-core/update.sh` is executable.
    - If `aiida-mlip` is enabled: all 8 `aiida-mlip-*` skills exist, execution rules are placed, and `aiida-mlip/update.sh` is executable.
+   - If `atomisticskills` is enabled: all 6 `atomisticskills-*` skills exist, execution rules are placed, and `atomisticskills/update.sh` is executable.
    - `AGENTS.md` documents the installed rules and skills.
    - Clean up `/tmp/ai-rules` and `/tmp/elephant-goldfish` if created.
 
 2. **Report to the User**:
    - Summary of installed rules and skills.
    - Summary of `AGENTS.md` updates.
-   - Quick usage cheatsheet (`/interject <new info>`, `/<project_name>-dev`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`, `/janus-core`, `/aiida-mlip-core`).
+   - Quick usage cheatsheet (`/interject <new info>`, `/<project_name>-dev`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`, `/janus-core`, `/aiida-mlip-core`, `/atomisticskills-core`).
    - **Do NOT commit or push** unless the user explicitly asks you to stage or commit the changes.

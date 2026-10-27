@@ -120,3 +120,32 @@ This project integrates automated provenance and high-throughput calculation wor
 To sync skills and reference docs with upstream releases: `./aiida-mlip/update.sh`
 <<<AIIDA_MLIP_SNIPPET_END>>>
 ```
+
+## 5. AtomisticSkills Discovery Suite Snippet (Inject when `atomisticskills` is enabled)
+
+```markdown
+<<<ATOMISTIC_SKILLS_SNIPPET_START>>>
+## AtomisticSkills Simulation & Discovery Suite
+
+This project integrates the multi-domain discovery ecosystem from MIT Learning Matter Lab [`AtomisticSkills`](https://github.com/learningmatter-mit/AtomisticSkills) (docs: [`https://learningmatter-mit.github.io/AtomisticSkills/`](https://learningmatter-mit.github.io/AtomisticSkills/), paper: arXiv:2605.24002):
+
+### Execution Rules
+1. **Research Protocol**: For multi-stage investigations, classify intent, establish `./research/<date>_<topic>/`, and maintain a `research_plan.md` artifact.
+2. **Environment Execution**: Launch simulation scripts via `venv/run <venv> python ...`, or via `micromamba run -n janus python ...` or `uv run --no-project python ...`.
+3. **MCP Stability**: Utilize standard MCP servers (`base`, `mace`, `matgl`, `fairchem`, `atomate2`, `drugdisc`, `smol`) or CLI fallback (`venv/run <venv> python -m src.mcp_server.cli <server> <tool> ...`).
+4. **Candidate Tracking**: Maintain a centralized tracking table (`candidates_tracking.csv`) across screening funnels.
+
+### Available AtomisticSkills Entrypoints
+
+| Skill | Slash Command | Scope |
+| :--- | :--- | :--- |
+| Core Framework & Catalog | `/atomisticskills-core` | Architecture, MCP configuration, environments launcher, and complete 133-skill directory |
+| Materials Science | `/atomisticskills-materials` | 57 skills: elasticity, phonons, EOS, LAMMPS MD, VASP DFT via atomate2, phase diagrams, CALPHAD, XRD phase analysis/refinement, synthesis recommendation |
+| Chemistry & Sorption | `/atomisticskills-chemistry` | 25 skills: conformer search, ORCA DFT, TS optimization, IRC verification, reaction kinetics, MOF gas sorption (GCMC, Widom) |
+| Drug Discovery | `/atomisticskills-drug-discovery` | 19 skills: pocket detection, ligand/protein prep, AutoDock Vina docking, OpenMM MD, MM/PBSA free energies, ADMET prediction |
+| Machine Learning | `/atomisticskills-ml` | 16 skills: foundation MLIP selection, MACE/FairChem/MatGL fine-tuning, generative diffusion (MatterGen, DiffCSP, ADIT), committee uncertainty |
+| Research Workflows | `/atomisticskills-workflows` | 9 multi-stage campaigns: Materials Discovery, Drug HTVS, MOF CO2 DAC, Generative Halides, MLIP Finetuning |
+
+To sync skills and reference docs with upstream releases: `./atomisticskills/update.sh`
+<<<ATOMISTIC_SKILLS_SNIPPET_END>>>
+```
