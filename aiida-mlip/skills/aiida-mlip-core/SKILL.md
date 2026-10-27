@@ -92,3 +92,4 @@ Keep skills and reference docs synchronized with upstream GitHub repo (`stfc/aii
 ```
 
 See [entry_points.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-core/references/entry_points.md) and [calculations_overview.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-core/references/calculations_overview.md) for full reference tables.
+

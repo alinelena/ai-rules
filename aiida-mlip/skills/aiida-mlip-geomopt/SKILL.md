@@ -80,3 +80,4 @@ print(f"Final Energy: {calc.outputs.output_parameters['final_energy']} eV")
 ```
 
 See [ports.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-geomopt/references/ports.md) for full input/output port definitions.
+

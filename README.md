@@ -40,6 +40,12 @@ Read ~/playground/ai-rules/BOOTSTRAP.md and install skills and rules in this pro
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with elephant-goldfish=off.`
 - **Only `/interject`**:
   > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with elephant-goldfish=off and dev-template=off.`
+- **Include Janus-Core (`janus-core=on`)**:
+  > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with janus-core=on.`
+- **Include AiiDA-MLIP (`aiida-mlip=on`)**:
+  > `Read https://github.com/alinelena/ai-rules and install skills and rules in this project with aiida-mlip=on.`
+- **Complete Atomistic & Workflow Suite (`janus-core=on` + `aiida-mlip=on`)**:
+  > `Read https://github.com/alinelena/ai-rules and install all skills and rules in this project with janus-core=on and aiida-mlip=on.`
 
 See [`PROMPTS.md`](./PROMPTS.md) for more copy-pasteable prompts, including smart-merging upstream updates.
 
@@ -81,6 +87,41 @@ Installed by default from [`https://github.com/ddmms/elephant-goldfish`](https:/
 ### 3. `<project_name>-dev` — Contextualized Development Guide Skill
 
 Populated automatically during bootstrap from [`antigravity/skills/dev-template/SKILL.md`](./antigravity/skills/dev-template/SKILL.md) using the target repository's detected stack profile (`micromamba`, `uv`, `uv_build`, `ruff`, `pytest`, `tox`, `.github/workflows/`), giving the agent an on-demand reference (`/<project_name>-dev`) for running tests, adding dependencies, linting, and verifying builds.
+
+### 4. Janus-Core Atomistic Simulation Suite (`stfc/janus-core`)
+
+Installed from the [`janus-core`](https://github.com/alinelena/ai-rules/tree/main/janus-core) capability group, grounded in STFC [`janus-core`](https://github.com/stfc/janus-core) (docs: [`https://stfc.github.io/janus-core/`](https://stfc.github.io/janus-core/)):
+
+- **Multi-MLIP Foundation**: Support for `mace_mp`, `mace_off`, `sevennet`, `chgnet`, `nequip`, `deepmd`, `orb`, `mattersim`, `upet`, `fairchem`.
+- **10 Modular Skills**:
+  - `/janus-core`: Foundation guide, architecture selection, devices (`cpu`, `cuda`, `mps`, `xpu`), YAML workflows, Context7 live docs.
+  - `/janus-singlepoint`: Static single-point energy, forces, stress, Hessians.
+  - `/janus-geomopt`: Coordinate and unit cell relaxation (`FrechetCellFilter`, variable pressure).
+  - `/janus-md`: Microcanonical (NVE), canonical (NVT), and isothermal-isobaric (NPT) dynamics, temperature ramps, PLUMED metadynamics.
+  - `/janus-eos-elasticity`: Equation of state ($E-V$ fitting, bulk modulus) and 6x6 elasticity stiffness matrix ($C_{ij}$, VRH averages).
+  - `/janus-phonons`: Phonon dispersion curves, DOS, and vibrational thermodynamics via Phonopy.
+  - `/janus-neb`: Climbing Image NEB (CI-NEB), IDPP interpolation, reaction barrier heights.
+  - `/janus-descriptors`: MLIP invariant representation extraction.
+  - `/janus-train-mlip`: MACE model training and transfer learning fine-tuning.
+  - `/janus-analysis`: MD observables (RDF $g(r)$, VAF/VACF, MSD, diffusion coefficients).
+- **Structure Inspector**: `janus-core/tools/structure_inspector.py` for pre-simulation verification.
+- **Upstream Sync**: Keep all skills updated via `./janus-core/update.sh` (or `./janus-core/update.sh --check`).
+
+### 5. AiiDA-MLIP Automated Workflows (`stfc/aiida-mlip`)
+
+Installed from the [`aiida-mlip`](https://github.com/alinelena/ai-rules/tree/main/aiida-mlip) capability group, grounded in STFC [`aiida-mlip`](https://github.com/stfc/aiida-mlip) (docs: [`https://stfc.github.io/aiida-mlip/`](https://stfc.github.io/aiida-mlip/)):
+
+- **Automated Provenance & HPC Workflows**: Bridges `janus-core` with AiiDA's database and daemon infrastructure.
+- **8 Modular Skills**:
+  - `/aiida-mlip-core`: Profile setup (`verdi presto`), code registration (`janus@localhost`), `ModelData`, `JanusConfigfile`.
+  - `/aiida-mlip-singlepoint`: Static calculation job (`mlip.sp`).
+  - `/aiida-mlip-geomopt`: Optimization and cell relaxation job (`mlip.opt`).
+  - `/aiida-mlip-md`: Molecular dynamics simulation job (`mlip.md`).
+  - `/aiida-mlip-phonons`: Phonon calculations job (`mlip.ph`).
+  - `/aiida-mlip-descriptors`: Invariant feature extraction job (`mlip.descriptors`).
+  - `/aiida-mlip-train`: MACE model training and fine-tuning job (`mlip.train`).
+  - `/aiida-mlip-workflows`: High-throughput workgraphs with `aiida-workgraph` (`build_ht_calc`) across structure directories.
+- **Upstream Sync**: Keep all skills updated via `./aiida-mlip/update.sh` (or `./aiida-mlip/update.sh --check`).
 
 ---
 

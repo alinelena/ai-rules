@@ -16,6 +16,8 @@ This file is read by an **Antigravity** agent (Antigravity IDE, Antigravity 2.0,
    - **`elephant-goldfish` (`default: ON`)**: Installs and stack-adapts the 5 Elephant/Goldfish workflow skills (`eg-brainstorm`, `eg-prd`, `eg-fix-bug`, `eg-new-feature`, `eg-precommit-review`) from [`https://github.com/ddmms/elephant-goldfish`](https://github.com/ddmms/elephant-goldfish) (branch `ddmms`).
    - **`interject` (`default: ON`)**: Installs the `/interject` rule (`.agents/rules/interject.md`), the `/interject` slash-command skill (`.agents/skills/interject/SKILL.md`), and the `/interject` section in `AGENTS.md` so the user can inject new information at any time and force the agent to rethink its approach from first principles.
    - **`dev-template` (`default: ON`)**: Contextualizes `antigravity/skills/dev-template/SKILL.md` with the target repository's stack profile and installs it to `.agents/skills/<project_name>-dev/SKILL.md`.
+   - **`janus-core` (`default: AUTO-DETECT / OFF`)**: Installs the 10 STFC [`janus-core`](https://github.com/stfc/janus-core) atomistic simulation skills, execution rules, and `structure_inspector.py` tool. Auto-enabled if `janus-core` is found in the target's dependencies or explicitly requested (`janus-core=on`).
+   - **`aiida-mlip` (`default: AUTO-DETECT / OFF`)**: Installs the 8 STFC [`aiida-mlip`](https://github.com/stfc/aiida-mlip) workflow and calculation skills and execution rules. Auto-enabled if `aiida-mlip` or `aiida` is found in dependencies or explicitly requested (`aiida-mlip=on`).
 
 3. **Check for existing files**:
    - Check if the target already has `.agents/rules/interject.md`, `.agents/skills/interject/SKILL.md`, `.agents/skills/<project_name>-dev/SKILL.md`, or `.agents/skills/eg-*/SKILL.md`.
@@ -40,6 +42,14 @@ rm -rf /tmp/elephant-goldfish
 git clone --depth 1 -b ddmms https://github.com/ddmms/elephant-goldfish.git /tmp/elephant-goldfish
 ```
 *(Fallback if `git clone` is unavailable: use `gh api "repos/ddmms/elephant-goldfish/contents/<PATH>?ref=ddmms" -H 'Accept: application/vnd.github.raw'` or `curl -fsSL "https://raw.githubusercontent.com/ddmms/elephant-goldfish/ddmms/<PATH>"` for `gemini/BOOTSTRAP.md`, `gemini/gemini-md-snippet.md`, and `gemini/commands/eg-{brainstorm,prd,fix-bug,new-feature,precommit-review}.md`.)*
+
+### 1C. Fetch `janus-core` and `aiida-mlip` Capability Groups (when enabled)
+When `janus-core` or `aiida-mlip` is requested or detected in the target stack:
+- If reading from a local clone of `ai-rules`, read from `janus-core/` and `aiida-mlip/` directly.
+- If fetched remotely, copy from `/tmp/ai-rules/janus-core` and `/tmp/ai-rules/aiida-mlip`.
+- Upstream source references:
+  - `janus-core`: [`https://github.com/stfc/janus-core`](https://github.com/stfc/janus-core) and [`https://stfc.github.io/janus-core/`](https://stfc.github.io/janus-core/)
+  - `aiida-mlip`: [`https://github.com/stfc/aiida-mlip`](https://github.com/stfc/aiida-mlip) and [`https://stfc.github.io/aiida-mlip/`](https://stfc.github.io/aiida-mlip/)
 
 ---
 
@@ -120,11 +130,24 @@ Using `/tmp/elephant-goldfish/gemini/commands/eg-{brainstorm,prd,fix-bug,new-fea
 
 *(Optional: If the `agy` CLI binary is available in `PATH`, also run `agy skills install .agents/skills/<skill-name> --scope workspace` for each installed skill. In Antigravity IDE and Antigravity 2.0, placing `SKILL.md` inside `.agents/skills/<skill-name>/` automatically registers the skill and its `/<skill-name>` slash command.)*
 
+### 3D. Option 4 — `janus-core` Skills & Rules Group (When Enabled)
+When `janus-core` is enabled (from STFC [`janus-core`](https://github.com/stfc/janus-core)):
+1. Copy the 10 skills from `janus-core/skills/` into `<target>/.agents/skills/` (or copy the entire `janus-core/` folder to `<target>/janus-core/` and register `"janus-core/skills"` in `<target>/.agents/skills.json`).
+2. Copy `janus-core/rules/janus-rules.md` to `<target>/.agents/rules/janus-rules.md`.
+3. Copy `janus-core/tools/structure_inspector.py` to `<target>/tools/structure_inspector.py` (or `<target>/janus-core/tools/`).
+4. Ensure `./janus-core/update.sh` is available in `<target>` for syncing future upstream updates.
+
+### 3E. Option 5 — `aiida-mlip` Skills & Rules Group (When Enabled)
+When `aiida-mlip` is enabled (from STFC [`aiida-mlip`](https://github.com/stfc/aiida-mlip)):
+1. Copy the 8 skills from `aiida-mlip/skills/` into `<target>/.agents/skills/` (or copy the entire `aiida-mlip/` folder to `<target>/aiida-mlip/` and register `"aiida-mlip/skills"` in `<target>/.agents/skills.json`).
+2. Copy `aiida-mlip/rules/aiida-mlip-rules.md` to `<target>/.agents/rules/aiida-mlip-rules.md`.
+3. Ensure `./aiida-mlip/update.sh` is available in `<target>` for syncing future upstream updates.
+
 ---
 
 ## Step 4: Update `<target>/AGENTS.md`
 
-Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>`, `<<<EG_SNIPPET_START>>>`, and `<project_name>-dev`) with the target project's Stack Profile values:
+Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INTERJECT_SNIPPET_START>>>`, `<<<EG_SNIPPET_START>>>`, `<project_name>-dev`, `<<<JANUS_CORE_SNIPPET_START>>>`, and `<<<AIIDA_MLIP_SNIPPET_START>>>`) with the target project's Stack Profile values:
 
 - If `<target>/AGENTS.md` already exists, inject or update the enabled sections cleanly without clobbering existing project rules.
 - If `<target>/GEMINI.md` exists but `AGENTS.md` does not, preserve existing rules from `GEMINI.md` into `AGENTS.md` alongside the new snippets.
@@ -138,11 +161,13 @@ Read `antigravity/agents-md-snippet.md` and tailor the enabled snippets (`<<<INT
    - If `interject` is enabled: `.agents/rules/interject.md` and `.agents/skills/interject/SKILL.md` exist and have valid formatting.
    - If `dev-template` is enabled: `.agents/skills/<project_name>-dev/SKILL.md` exists, has `name: <project_name>-dev` in its YAML frontmatter, and contains zero remaining `<...>` template placeholders.
    - If `elephant-goldfish` is enabled: all 5 `.agents/skills/eg-*/SKILL.md` files exist, start with valid YAML frontmatter (`name`, `description`), have zero remaining `[BOOTSTRAP: ...]` placeholders, and retain intact `<<<TEMPLATE_START>>> ... <<<TEMPLATE_END>>>`, `<<<COMPREHENSION_START>>>`, `<<<DESIGN_START>>>`, and `<<<READINESS_START>>>` markers.
+   - If `janus-core` is enabled: all 10 `janus-*` skills exist, execution rules are placed, and `janus-core/update.sh` is executable.
+   - If `aiida-mlip` is enabled: all 8 `aiida-mlip-*` skills exist, execution rules are placed, and `aiida-mlip/update.sh` is executable.
    - `AGENTS.md` documents the installed rules and skills.
    - Clean up `/tmp/ai-rules` and `/tmp/elephant-goldfish` if created.
 
 2. **Report to the User**:
-   - Summary of installed rules (`.agents/rules/interject.md`) and skills (`.agents/skills/interject/`, `.agents/skills/<project_name>-dev/`, `.agents/skills/eg-*/`).
+   - Summary of installed rules and skills.
    - Summary of `AGENTS.md` updates.
-   - Quick usage cheatsheet (`/interject <new info>`, `/<project_name>-dev`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`).
+   - Quick usage cheatsheet (`/interject <new info>`, `/<project_name>-dev`, `/eg-brainstorm`, `/eg-prd`, `/eg-new-feature`, `/eg-fix-bug`, `/eg-precommit-review`, `/janus-core`, `/aiida-mlip-core`).
    - **Do NOT commit or push** unless the user explicitly asks you to stage or commit the changes.

@@ -89,3 +89,4 @@ print(f"Trained model registered: PK={model_node.pk}")
 ```
 
 See [ports.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-train/references/ports.md) for full input/output port definitions.
+

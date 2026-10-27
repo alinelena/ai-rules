@@ -85,3 +85,4 @@ micromamba run -n janus verdi calcjob outputcat <PK>
 ```
 
 See [ports.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-singlepoint/references/ports.md) for full input/output port definitions.
+

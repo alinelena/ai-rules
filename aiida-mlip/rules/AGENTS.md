@@ -19,3 +19,4 @@
 
 5. **Upstream Documentation**:
    - Reference [AiiDA-MLIP Documentation](https://stfc.github.io/aiida-mlip/) and [AiiDA-MLIP Repository](https://github.com/stfc/aiida-mlip).
+

@@ -59,3 +59,4 @@ The updater automatically:
 5. Regenerates reference documents (`entry_points.md`, `calculations_overview.md`, `ports.md`).
 6. Synchronizes example submission scripts.
 7. Updates `VERSION` and `plugin.json`.
+

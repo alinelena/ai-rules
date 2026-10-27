@@ -25,3 +25,4 @@ When interacting with STFC `aiida-mlip` or submitting AiiDA calculations with ML
 
 6. **Documentation & Live Reference**:
    - Query [official aiida-mlip documentation](https://stfc.github.io/aiida-mlip/) and [aiida-mlip GitHub repository](https://github.com/stfc/aiida-mlip).
+

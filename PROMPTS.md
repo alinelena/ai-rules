@@ -34,6 +34,21 @@ You can toggle any of the three components (`elephant-goldfish`, `interject`, `d
   Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install only the /interject rule and skill in this project (elephant-goldfish=off, dev-template=off).
   ```
 
+- **Install with `janus-core` (`janus-core=on`)**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install the skills and rules in this project with janus-core=on.
+  ```
+
+- **Install with `aiida-mlip` (`aiida-mlip=on`)**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install the skills and rules in this project with aiida-mlip=on.
+  ```
+
+- **Install Full Atomistic & Workflow Stack (`janus-core=on` + `aiida-mlip=on`)**:
+  ```text
+  Read https://github.com/alinelena/ai-rules/blob/main/antigravity/BOOTSTRAP.md and install all skills and rules in this project with janus-core=on and aiida-mlip=on.
+  ```
+
 ---
 
 ## 3. Update an Already-Bootstrapped Project
@@ -51,13 +66,13 @@ Update this project's AI skills and rules from https://github.com/alinelena/ai-r
 
 ## 4. Install or Update Janus-Core Skills Group
 
-To equip a project with the STFC `janus-core` MLIP calculation skills, execution rules, and inspector tools:
+To equip a project with the STFC [`janus-core`](https://github.com/stfc/janus-core) (docs: [`https://stfc.github.io/janus-core/`](https://stfc.github.io/janus-core/)) MLIP calculation skills, execution rules, and inspector tools:
 
 ```text
 Read https://github.com/alinelena/ai-rules and install the janus-core skills group (singlepoint, geomopt, md, eos-elasticity, phonons, neb, descriptors, train-mlip, analysis) and execution rules into this project.
 ```
 
-To sync skills and reference docs with the latest upstream `janus-core` release:
+To sync skills and reference docs with the latest upstream [`janus-core`](https://github.com/stfc/janus-core) release:
 
 ```bash
 ./janus-core/update.sh
@@ -67,13 +82,13 @@ To sync skills and reference docs with the latest upstream `janus-core` release:
 
 ## 5. Install or Update AiiDA-MLIP Skills Group
 
-To equip a project with the STFC `aiida-mlip` calculation skills, workgraphs, and execution rules:
+To equip a project with the STFC [`aiida-mlip`](https://github.com/stfc/aiida-mlip) (docs: [`https://stfc.github.io/aiida-mlip/`](https://stfc.github.io/aiida-mlip/)) calculation skills, workgraphs, and execution rules:
 
 ```text
 Read https://github.com/alinelena/ai-rules and install the aiida-mlip skills group (singlepoint, geomopt, md, phonons, descriptors, train, workflows) and execution rules into this project.
 ```
 
-To sync skills and reference docs with the latest upstream `aiida-mlip` release:
+To sync skills and reference docs with the latest upstream [`aiida-mlip`](https://github.com/stfc/aiida-mlip) release:
 
 ```bash
 ./aiida-mlip/update.sh

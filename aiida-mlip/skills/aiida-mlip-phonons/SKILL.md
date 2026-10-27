@@ -68,3 +68,4 @@ print("Phonon calculation status:", params.get("status"))
 ```
 
 See [ports.md](https://github.com/alinelena/ai-rules/blob/main/aiida-mlip/skills/aiida-mlip-phonons/references/ports.md) for full input/output port definitions.
+
