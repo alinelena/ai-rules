@@ -13,6 +13,7 @@ When you point an Antigravity agent at this repository in a target project, it c
 | **1. `elephant-goldfish`** | **ON** | `.agents/skills/eg-brainstorm/SKILL.md`<br>`.agents/skills/eg-prd/SKILL.md`<br>`.agents/skills/eg-fix-bug/SKILL.md`<br>`.agents/skills/eg-new-feature/SKILL.md`<br>`.agents/skills/eg-precommit-review/SKILL.md`<br>+ `AGENTS.md` section | Fetches the [Elephant/Goldfish](https://github.com/ddmms/elephant-goldfish) workflow templates (`ddmms` branch), inspects your project's stack (language, package manager, linter, test runner), and adaptively injects stack-tuned skills. |
 | **2. `interject`** | **ON** | `.agents/rules/interject.md`<br>`.agents/skills/interject/SKILL.md`<br>+ `AGENTS.md` section | Adds an always-on project rule and a first-class `/interject` slash command that lets you inject new information mid-task and forces the agent to audit prior assumptions and rethink its approach from first principles. |
 | **3. `dev-template`** | **ON** | `.agents/skills/<project_name>-dev/SKILL.md`<br>+ `AGENTS.md` entry | Populates the generic `<project_name>-dev` development guide template with your project's environment (`micromamba`, `uv`), build backend (`uv_build`), linting (`ruff`), testing (`pytest`, `tox`), and CI/CD workflows. |
+| **4. `janus-core`** | **Optional** | `janus-core/skills/janus-*/SKILL.md`<br>`janus-core/rules/janus-rules.md`<br>`janus-core/tools/structure_inspector.py` | Full skill group and execution rules for STFC [janus-core](https://github.com/stfc/janus-core) (MLIP atomistic simulations: singlepoint, geomopt, md, eos-elasticity, phonons, neb, descriptors, train-mlip, analysis) with an automated sync script. |
 
 ---
 
@@ -89,7 +90,7 @@ ai-rules/
 ├── BOOTSTRAP.md                         # Root agent bootstrap entrypoint
 ├── PROMPTS.md                           # Copy-paste prompts for installing & updating
 ├── README.md                            # Documentation and usage guide
-├── antigravity/
+├── antigravity/                         # Core Antigravity bootstrap group
 │   ├── BOOTSTRAP.md                     # Step-by-step Antigravity injection procedure
 │   ├── agents-md-snippet.md             # Snippets injected into target AGENTS.md
 │   ├── rules/
@@ -99,8 +100,32 @@ ai-rules/
 │       │   └── SKILL.md                 # Template for <project_name>-dev skill
 │       └── interject/
 │           └── SKILL.md                 # /interject slash-command skill
+├── janus-core/                          # Janus-Core skills & rules capability group
+│   ├── README.md                        # Documentation for janus-core group
+│   ├── plugin.json                      # Antigravity plugin manifest
+│   ├── VERSION                          # Upstream version tracker
+│   ├── update.sh                        # One-command updater from GitHub & docs
+│   ├── rules/                           # Janus-Core execution rules
+│   │   ├── AGENTS.md
+│   │   └── janus-rules.md
+│   ├── scripts/
+│   │   ├── update_skills.py             # Zero-dependency upstream parser & updater
+│   │   └── update.sh
+│   ├── tools/
+│   │   └── structure_inspector.py       # Atomic structure inspector CLI/JSON
+│   └── skills/                          # 10 specialized Janus-Core skills
+│       ├── janus-core/
+│       ├── janus-singlepoint/
+│       ├── janus-geomopt/
+│       ├── janus-md/
+│       ├── janus-eos-elasticity/
+│       ├── janus-phonons/
+│       ├── janus-neb/
+│       ├── janus-descriptors/
+│       ├── janus-train-mlip/
+│       └── janus-analysis/
 └── .agents/
     ├── rules/
     │   └── interject.md                 # Dogfooded /interject rule for this repo
-    └── skills.json                      # Registers antigravity/skills in this workspace
+    └── skills.json                      # Registers antigravity & janus-core skills
 ```

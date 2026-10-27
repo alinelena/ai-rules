@@ -3,6 +3,9 @@
     {
       "path": "antigravity/skills",
       "exclude": ["dev-template"]
+    },
+    {
+      "path": "janus-core/skills"
     }
   ]
 }

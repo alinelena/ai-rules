@@ -46,3 +46,19 @@ Update this project's AI skills and rules from https://github.com/alinelena/ai-r
 2. Diff our local `.agents/skills/<project_name>-dev/SKILL.md` and `.agents/skills/eg-*/SKILL.md` files against the upstream templates in `ai-rules` and `ddmms/elephant-goldfish`, merging any new workflow sections while preserving all of our project-specific test, lint, and stack commands.
 3. Update `AGENTS.md` snippets if needed and report the changes without committing.
 ```
+
+---
+
+## 4. Install or Update Janus-Core Skills Group
+
+To equip a project with the STFC `janus-core` MLIP calculation skills, execution rules, and inspector tools:
+
+```text
+Read https://github.com/alinelena/ai-rules and install the janus-core skills group (singlepoint, geomopt, md, eos-elasticity, phonons, neb, descriptors, train-mlip, analysis) and execution rules into this project.
+```
+
+To sync skills and reference docs with the latest upstream `janus-core` release:
+
+```bash
+./janus-core/update.sh
+```
