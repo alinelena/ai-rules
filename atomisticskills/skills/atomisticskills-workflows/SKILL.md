@@ -36,3 +36,4 @@ When a user initiates an open-ended research question that matches an end-to-end
 4. **Execution**: Launch stages sequentially, discarding non-viable candidates at early inexpensive tiers before allocating expensive DFT, all-atom MD, or GCMC resources.
 
 Upstream Source: [AtomisticSkills Workflows Directory](https://github.com/learningmatter-mit/AtomisticSkills/blob/main/.agents/workflows)
+

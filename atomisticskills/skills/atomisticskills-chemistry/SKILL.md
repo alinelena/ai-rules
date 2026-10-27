@@ -75,3 +75,4 @@ The Chemistry suite in [AtomisticSkills](https://github.com/learningmatter-mit/A
 | `chem-vibration` | Harmonic vibrational frequencies and normal modes | [chem-vibration](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills/chem-vibration) |
 
 Upstream Source: [AtomisticSkills Chemistry Repository](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills)
+

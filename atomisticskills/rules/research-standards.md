@@ -47,3 +47,4 @@ Before starting a formal research plan, classify the user's intent:
    - Keep simulations reproducible with pinned seeds and recorded parameters.
 
 Upstream Reference: [AtomisticSkills Research Standards](https://github.com/learningmatter-mit/AtomisticSkills/blob/main/.agents/rules/research-standards.md)
+

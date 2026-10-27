@@ -28,3 +28,4 @@ When authoring simulation scripts, data processing routines, or extending tools 
 - **Testing**: Atomistic calculations and MCP tools must include `pytest`-based unit tests placed in `tests/`.
 
 Upstream Reference: [AtomisticSkills Coding Standards](https://github.com/learningmatter-mit/AtomisticSkills/blob/main/.agents/rules/coding-standards.md)
+

@@ -69,3 +69,4 @@ The Machine Learning suite in [AtomisticSkills](https://github.com/learningmatte
 | `ml-property-predict-scd` | Predict superconducting critical temperature $T_c$ | [ml-property-predict-scd](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills/ml-property-predict-scd) |
 
 Upstream Source: [AtomisticSkills ML Repository](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills)
+

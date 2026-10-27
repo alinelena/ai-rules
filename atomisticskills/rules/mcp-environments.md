@@ -51,3 +51,4 @@ Environments support optional extras specified as `<venv>+<extra>`:
 - When running via uv: `uv run --no-project python <script>`
 
 Upstream Reference: [AtomisticSkills MCP Environments](https://github.com/learningmatter-mit/AtomisticSkills/blob/main/.agents/rules/mcp-environments.md)
+

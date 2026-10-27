@@ -68,3 +68,4 @@ The Drug Discovery suite in [AtomisticSkills](https://github.com/learningmatter-
 | `drug-trajectory-analysis` | Analyze MD trajectories (RMSD, RMSF, contact persistence) | [drug-trajectory-analysis](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills/drug-trajectory-analysis) |
 
 Upstream Source: [AtomisticSkills Drug Discovery Repository](https://github.com/learningmatter-mit/AtomisticSkills/tree/main/skills)
+
