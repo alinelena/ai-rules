@@ -77,4 +77,5 @@ neb_calc.calc()
 print("NEB calculation completed.")
 ```
 
-See [options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-neb/references/options.md) for full options reference.
+See [options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-neb/references/options.md) for full options reference.
+

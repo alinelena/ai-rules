@@ -18,3 +18,4 @@ The `janus elasticity` command applies small strains to determine the 6x6 elasti
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Log file path |
 | `--summary` | `path` | auto | Summary YAML file path |
+

@@ -13,3 +13,4 @@ The `janus train` command trains or fine-tunes MLIP models by passing structured
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon emissions tracking |
 | `--log` | `path` | auto | Execution log filepath |
 | `--summary` | `path` | auto | Execution summary YAML filepath |
+

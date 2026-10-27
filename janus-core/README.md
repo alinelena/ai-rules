@@ -24,7 +24,7 @@ This directory contains a complete, self-contained capability group of **AI Skil
 ### 2. Multi-Agent Execution Rules (`janus-core/rules/`)
 
 - `janus-rules.md` / `AGENTS.md`: Enforces key execution guidelines:
-  - Run in the `janus` micromamba environment (`/opt/micromamba/envs/janus/bin/python`) or via `uv`.
+  - Run in the `janus` micromamba environment (`micromamba run -n janus python`) or via `uv`.
   - Pass `--no-tracker` in headless / CI environments to avoid unnecessary emissions logging overhead.
   - Always use `--filter FrechetCellFilter` for periodic cell relaxations.
   - Inspect atomic configurations with `janus-core/tools/structure_inspector.py` prior to heavy simulations.
@@ -64,3 +64,4 @@ The updater automatically:
 4. Regenerates reference documents (`cli_overview.md`, `architectures.md`, `options.md`).
 5. Synchronizes full YAML configuration examples.
 6. Updates `VERSION` and `plugin.json`.
+

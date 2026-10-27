@@ -3,7 +3,7 @@
 When interacting with STFC `janus-core` or running atomistic calculations:
 
 1. **Python Environment**:
-   - Always run commands in the `janus` micromamba environment (`/opt/micromamba/envs/janus/bin/python`) or via `uv run --no-project --python /opt/micromamba/envs/janus/bin/python`.
+   - Always run commands in the `janus` micromamba environment (`micromamba run -n janus python`) or via `uv run --no-project python`.
    - Install packages and run tests using `uv`.
 
 2. **Headless Execution & Emission Tracking**:
@@ -17,3 +17,4 @@ When interacting with STFC `janus-core` or running atomistic calculations:
 
 5. **Live Documentation**:
    - For up-to-date documentation and snippets, use Context7 via `janus_mcp.context7_client.Context7Client` or query `https://context7.com/stfc/janus-core` and `https://stfc.github.io/janus-core/`.
+

@@ -88,4 +88,5 @@ python janus-core/skills/janus-geomopt/scripts/run_geomopt.py \
   --out relaxed.cif
 ```
 
-See [options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-geomopt/references/options.md) for full options reference.
+See [options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-geomopt/references/options.md) for full options reference.
+

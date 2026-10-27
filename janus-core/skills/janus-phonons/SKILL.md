@@ -77,4 +77,5 @@ phonon_calc.calc()
 print("Phonon calculation completed.")
 ```
 
-See [options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-phonons/references/options.md) for full options reference.
+See [options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-phonons/references/options.md) for full options reference.
+

@@ -31,7 +31,7 @@ description: >-
 
 ## Multi-Agent Execution Rules
 
-1. **Python Environment**: Run in the `janus` micromamba environment (`/opt/micromamba/envs/janus/bin/python`) or via `uv run --no-project --python /opt/micromamba/envs/janus/bin/python`.
+1. **Python Environment**: Run in the `janus` micromamba environment (`micromamba run -n janus python`) or via `uv run --no-project python`.
 2. **Headless & CI Execution**: Always pass `--no-tracker` in automated scripts to disable CodeCarbon emission tracking and background pynvml warnings.
 3. **Structure Verification**: Always inspect structure coordinates, cell parameters, and periodic boundary conditions using `janus-core/tools/structure_inspector.py <structure>` before executing heavy simulations.
 4. **Cell Relaxation Filter**: For crystal geometry optimizations with cell changes, always prefer `--filter FrechetCellFilter` (or `filter_func="FrechetCellFilter"`).
@@ -72,7 +72,7 @@ Pass `--arch <arch>` and optionally `--model <model-path-or-id>`:
 - **Organic Molecules**: `--arch mace_off` or `--arch mace_omol`
 - **Large-scale Condensed Matter**: `--arch deepmd`
 
-Detailed architecture guide: see [architectures.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-core/references/architectures.md).
+Detailed architecture guide: see [architectures.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-core/references/architectures.md).
 
 ### 4. Updating Janus-Core Skills from Upstream
 
@@ -82,3 +82,4 @@ Keep skills and reference docs synchronized with upstream GitHub repo (`stfc/jan
 # Check mode without writing changes:
 ./janus-core/update.sh --check
 ```
+

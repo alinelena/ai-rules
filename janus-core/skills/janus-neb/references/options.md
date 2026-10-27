@@ -22,3 +22,4 @@ The `janus neb` command calculates minimum energy pathways (MEP) and activation 
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Log file path |
 | `--summary` | `path` | auto | Summary YAML file path |
+

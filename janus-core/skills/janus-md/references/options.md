@@ -33,3 +33,4 @@ The `janus md` command simulates finite-temperature dynamics across statistical 
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Execution log filepath |
 | `--summary` | `path` | auto | Execution summary YAML filepath |
+

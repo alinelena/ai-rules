@@ -10,7 +10,7 @@ This skill outlines the software engineering practices, tooling stack, and local
 
 ## 1. Environment & Dependency Management
 - **Environment**: Specify the environment manager (e.g., micromamba / conda / venv / direnv).
-  - Prefix/activation command: `<environment_prefix_command>` (e.g. `micromamba run -n janus <command>` or `uv run --python /opt/micromamba/envs/janus/bin/python <command>`)
+  - Prefix/activation command: `<environment_prefix_command>` (e.g. `micromamba run -n janus <command>` or `uv run <command>`)
 - **Dependencies**: Specify the package manager (e.g., `uv`, `poetry`, `pdm`, `npm`, `cargo`).
   - Install dependencies: `<install_command>` (e.g. `<env_prefix> uv pip install -e ".[test]"` or `<env_prefix> uv sync`)
   - Add new package: `<add_command>` (e.g. `<env_prefix> uv add <package>`)

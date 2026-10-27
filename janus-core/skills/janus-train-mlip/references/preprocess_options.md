@@ -10,3 +10,4 @@ The `janus preprocess` command converts atomic datasets into HDF5 binary represe
 | `--log` | `path` | `./janus_results/preprocess-log.yml` | Path to save preprocessing logs |
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--summary` | `path` | `./janus_results/preprocess-summary.yml` | Path to save preprocessing summary |
+

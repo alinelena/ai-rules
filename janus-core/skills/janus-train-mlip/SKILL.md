@@ -65,4 +65,5 @@ janus train \
   --no-tracker
 ```
 
-See [train_options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-train-mlip/references/train_options.md) and [preprocess_options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-train-mlip/references/preprocess_options.md) for full options.
+See [train_options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-train-mlip/references/train_options.md) and [preprocess_options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-train-mlip/references/preprocess_options.md) for full options.
+

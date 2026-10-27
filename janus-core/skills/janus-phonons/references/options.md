@@ -22,3 +22,4 @@ The `janus phonons` command calculates harmonic phonon dispersions, vibrational 
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Log file path |
 | `--summary` | `path` | auto | Summary YAML file path |
+

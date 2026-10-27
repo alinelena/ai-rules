@@ -26,9 +26,9 @@ def inspect_structure(file_path: str, as_json: bool = False):
         print(
             "Error: 'ase' (Atomic Simulation Environment) is not installed in this Python environment.\n"
             "Please run with the janus micromamba environment:\n"
-            "  micromamba run -n janus python " + str(Path(__file__).resolve()) + " " + file_path + "\n"
+            "  micromamba run -n janus python janus-core/tools/structure_inspector.py " + file_path + "\n"
             "or run with uv:\n"
-            "  uv run --with ase python " + str(Path(__file__).resolve()) + " " + file_path,
+            "  uv run --with ase python janus-core/tools/structure_inspector.py " + file_path,
             file=sys.stderr,
         )
         sys.exit(1)

@@ -96,4 +96,5 @@ el_res = el_calc.calc()
 print("Stiffness Matrix C_ij (GPa):\n", el_res["elastic_tensor"])
 ```
 
-See [eos_options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-eos-elasticity/references/eos_options.md) and [elasticity_options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-eos-elasticity/references/elasticity_options.md) for full options.
+See [eos_options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-eos-elasticity/references/eos_options.md) and [elasticity_options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-eos-elasticity/references/elasticity_options.md) for full options.
+

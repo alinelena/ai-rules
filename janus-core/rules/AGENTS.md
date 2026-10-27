@@ -3,7 +3,7 @@
 ## Execution Guidelines
 
 1. **Python Environment**:
-   - Run commands in the `janus` environment (`/opt/micromamba/envs/janus/bin/python`) or via `uv run --no-project --python /opt/micromamba/envs/janus/bin/python`.
+   - Run commands in the `janus` environment (`micromamba run -n janus python`) or via `uv run --no-project python`.
    - Install packages and run tests using `uv`.
 
 2. **Headless Execution & Emission Tracking**:
@@ -17,3 +17,4 @@
 
 5. **Upstream Documentation**:
    - Reference `https://stfc.github.io/janus-core/` and `https://github.com/stfc/janus-core`.
+

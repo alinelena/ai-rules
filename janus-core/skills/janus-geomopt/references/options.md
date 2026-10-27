@@ -26,3 +26,4 @@ The `janus geomopt` command performs atomic coordinate and unit cell optimizatio
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Log file path |
 | `--summary` | `path` | auto | Summary YAML file path |
+

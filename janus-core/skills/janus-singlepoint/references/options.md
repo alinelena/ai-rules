@@ -19,3 +19,4 @@ The `janus singlepoint` command performs static calculations to compute total po
 | `--tracker / --no-tracker` | `bool` | `True` | Enable/disable CodeCarbon emissions tracking |
 | `--log` | `path` | auto | Filepath for execution log |
 | `--summary` | `path` | auto | Filepath for execution summary YAML |
+

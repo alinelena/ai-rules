@@ -80,4 +80,5 @@ out: results.extxyz
 tracker: false
 ```
 
-See [options.md](file:///home/drFaustroll/playground/ai-rules/janus-core/skills/janus-singlepoint/references/options.md) for the complete list of options.
+See [options.md](https://github.com/alinelena/ai-rules/blob/main/janus-core/skills/janus-singlepoint/references/options.md) for the complete list of options.
+

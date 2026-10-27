@@ -18,3 +18,4 @@ The `janus descriptors` command computes invariant machine learned representatio
 | `--tracker / --no-tracker`| `bool` | `True` | Enable/disable CodeCarbon tracking |
 | `--log` | `path` | auto | Log file path |
 | `--summary` | `path` | auto | Summary YAML file path |
+
