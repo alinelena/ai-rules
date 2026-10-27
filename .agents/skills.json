@@ -6,6 +6,9 @@
     },
     {
       "path": "janus-core/skills"
+    },
+    {
+      "path": "aiida-mlip/skills"
     }
   ]
 }

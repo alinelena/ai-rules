@@ -62,3 +62,19 @@ To sync skills and reference docs with the latest upstream `janus-core` release:
 ```bash
 ./janus-core/update.sh
 ```
+
+---
+
+## 5. Install or Update AiiDA-MLIP Skills Group
+
+To equip a project with the STFC `aiida-mlip` calculation skills, workgraphs, and execution rules:
+
+```text
+Read https://github.com/alinelena/ai-rules and install the aiida-mlip skills group (singlepoint, geomopt, md, phonons, descriptors, train, workflows) and execution rules into this project.
+```
+
+To sync skills and reference docs with the latest upstream `aiida-mlip` release:
+
+```bash
+./aiida-mlip/update.sh
+```

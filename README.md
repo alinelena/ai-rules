@@ -14,6 +14,7 @@ When you point an Antigravity agent at this repository in a target project, it c
 | **2. `interject`** | **ON** | `.agents/rules/interject.md`<br>`.agents/skills/interject/SKILL.md`<br>+ `AGENTS.md` section | Adds an always-on project rule and a first-class `/interject` slash command that lets you inject new information mid-task and forces the agent to audit prior assumptions and rethink its approach from first principles. |
 | **3. `dev-template`** | **ON** | `.agents/skills/<project_name>-dev/SKILL.md`<br>+ `AGENTS.md` entry | Populates the generic `<project_name>-dev` development guide template with your project's environment (`micromamba`, `uv`), build backend (`uv_build`), linting (`ruff`), testing (`pytest`, `tox`), and CI/CD workflows. |
 | **4. `janus-core`** | **Optional** | `janus-core/skills/janus-*/SKILL.md`<br>`janus-core/rules/janus-rules.md`<br>`janus-core/tools/structure_inspector.py` | Full skill group and execution rules for STFC [janus-core](https://github.com/stfc/janus-core) (MLIP atomistic simulations: singlepoint, geomopt, md, eos-elasticity, phonons, neb, descriptors, train-mlip, analysis) with an automated sync script. |
+| **5. `aiida-mlip`** | **Optional** | `aiida-mlip/skills/aiida-mlip-*/SKILL.md`<br>`aiida-mlip/rules/aiida-mlip-rules.md` | Full skill group and execution rules for STFC [aiida-mlip](https://github.com/stfc/aiida-mlip) (AiiDA provenance workflows: singlepoint, geomopt, md, phonons, descriptors, train, ht_workgraph) with an automated sync script. |
 
 ---
 
@@ -124,8 +125,28 @@ ai-rules/
 │       ├── janus-descriptors/
 │       ├── janus-train-mlip/
 │       └── janus-analysis/
+├── aiida-mlip/                          # AiiDA-MLIP skills & rules capability group
+│   ├── README.md                        # Documentation for aiida-mlip group
+│   ├── plugin.json                      # Antigravity plugin manifest
+│   ├── VERSION                          # Upstream version tracker
+│   ├── update.sh                        # One-command updater from GitHub & docs
+│   ├── rules/                           # AiiDA-MLIP execution rules
+│   │   ├── AGENTS.md
+│   │   └── aiida-mlip-rules.md
+│   ├── scripts/
+│   │   ├── update_skills.py             # Zero-dependency upstream parser & updater
+│   │   └── update.sh
+│   └── skills/                          # 8 specialized AiiDA-MLIP skills
+│       ├── aiida-mlip-core/
+│       ├── aiida-mlip-singlepoint/
+│       ├── aiida-mlip-geomopt/
+│       ├── aiida-mlip-md/
+│       ├── aiida-mlip-phonons/
+│       ├── aiida-mlip-descriptors/
+│       ├── aiida-mlip-train/
+│       └── aiida-mlip-workflows/
 └── .agents/
     ├── rules/
     │   └── interject.md                 # Dogfooded /interject rule for this repo
-    └── skills.json                      # Registers antigravity & janus-core skills
+    └── skills.json                      # Registers antigravity, janus-core & aiida-mlip skills
 ```
